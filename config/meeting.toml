@@ -1,0 +1,42 @@
+[meeting]
+topic = "Brainstorm: estratégia eficiente para estudar 45 min/dia por 30 dias"
+constraints = "Sem apps pagas. Cabe em 45 min/dia. Medir progresso semanalmente."
+max_turns = 12
+min_turns = 6
+
+# MAX de especialistas (além do Chair). Se você definir 10 mas só tiver 3 perfis, usa 3.
+max_specialists = 3
+
+agenda = [
+  "Definir rotina mínima viável",
+  "Definir métricas e checkpoints semanais",
+  "Riscos e mitigação",
+  "Action items com responsáveis"
+]
+
+[prompts]
+chair_decide = "prompts/chair/decide.txt"
+chair_minutes = "prompts/chair/minutes.txt"
+specialist_turn = "prompts/specialist/turn.txt"
+
+[chair]
+name = "Chair"
+system_instructions = "Você conduz uma reunião objetiva, regula turnos, equilibra participação e fecha com decisão + action items."
+
+[[specialists]]
+name = "Agente A (Ideação)"
+specialization = "geração de alternativas e criatividade sob restrições"
+system_instructions = "Gere opções comparáveis, concretas e pragmáticas. Evite abstração vazia."
+priority = 10
+
+[[specialists]]
+name = "Agente B (Crítica)"
+specialization = "riscos, validação, restrições e qualidade"
+system_instructions = "Seja cético e rigoroso: encontre falhas, suposições, riscos; proponha mitigação simples."
+priority = 9
+
+[[specialists]]
+name = "Agente C (Execução)"
+specialization = "implementação, passos mínimos, métricas e eficiência"
+system_instructions = "Converta ideias em plano executável: passos, métricas, checkpoints, critérios de sucesso."
+priority = 8

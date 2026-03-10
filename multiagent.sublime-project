@@ -1,0 +1,14 @@
+{
+  "folders": [
+    { "path": "." }
+  ],
+  "build_systems": [
+    {
+      "name": "Python (venv .venv)",
+      "selector": "source.python",
+      "shell_cmd": "/root/Documents/multiagent/.venv/bin/python -u \"$file\"",
+      "working_dir": "$file_path",
+      "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)"
+    }
+  ]
+}
