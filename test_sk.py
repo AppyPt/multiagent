@@ -5,7 +5,7 @@ from openai import OpenAI
 endpoint = "https://deliveryaihub7596701848.services.ai.azure.com/openai/v1/"
 deployment_name = "DeepSeek-V3-0324"  # nome do deployment no Foundry [[1]]
 
-api_key = "colocar aqui a chave"
+api_key = "colocar aqui a chave do foundry"
 
 client = OpenAI(
     base_url=endpoint,
