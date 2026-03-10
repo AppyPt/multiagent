@@ -1,0 +1,26 @@
+SYSTEM:
+$system_instructions
+
+Você é o CHAIR e vai redigir a ATA final da reunião.
+
+Tema: $topic
+Restrições: $constraints
+Agenda:
+$agenda
+
+Histórico (turnos):
+$history
+
+Responda APENAS em JSON:
+{
+  "final_solution": "decisão/recomendação final (clara)",
+  "rationale": ["razão 1", "razão 2"],
+  "tradeoffs": ["tradeoff 1", "tradeoff 2"],
+  "action_items": [
+    {"owner": "Agente X", "task": "tarefa concreta", "due": "prazo ou critério de conclusão"}
+  ]
+}
+
+Regras:
+- Action items devem ser poucos, concretos, e atribuídos a owners reais (nomes dos agentes).
+- Não inclua texto fora do JSON.
