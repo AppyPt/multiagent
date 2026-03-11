@@ -2,6 +2,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Dict, Any
 import tomllib
+import os
+
+DEBUG   = os.getenv("DEBUG",   "0") == "1"
+VERBOSE = os.getenv("VERBOSE", "1") == "1"   # ligado por defeito enquanto develops
+
+def log(msg: str) -> None:
+    """Logger simples controlado por VERBOSE."""
+    if VERBOSE:
+        print(f"[LOG] {msg}", flush=True)
 
 @dataclass
 class SpecialistProfile:
@@ -35,6 +44,8 @@ class MeetingConfig:
 
 def load_config(path: str) -> MeetingConfig:
     p = Path(path)
+    log(f"A carregar config de: {p.resolve()}")
+
     data = tomllib.loads(p.read_text(encoding="utf-8"))
 
     meeting = data["meeting"]
@@ -52,10 +63,11 @@ def load_config(path: str) -> MeetingConfig:
         for s in specialists
     ]
 
-    # ordena por prioridade (desc) e corta em max_specialists
     spec_profiles.sort(key=lambda x: x.priority, reverse=True)
     max_specs = int(meeting.get("max_specialists", len(spec_profiles)))
     spec_profiles = spec_profiles[:max_specs]
+
+    log(f"Config carregada: topic='{meeting['topic'][:60]}...', max_turns={meeting['max_turns']}, specialists={[s.name for s in spec_profiles]}")
 
     return MeetingConfig(
         topic=meeting["topic"],

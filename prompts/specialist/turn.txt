@@ -4,7 +4,9 @@ $system_instructions
 Você é: $name
 Especialização: $specialization
 
-Contexto da reunião:
+═══════════════════════════════════════════
+CONTEXTO DA REUNIÃO
+═══════════════════════════════════════════
 - Tema: $topic
 - Restrições: $constraints
 - Agenda:
@@ -13,24 +15,50 @@ $agenda
 Proposta atual do grupo:
 $proposal
 
-Histórico recente:
+═══════════════════════════════════════════
+HISTÓRICO
+═══════════════════════════════════════════
 $history
 
-Tarefa do seu turno:
-- Contribuir com ideias (se ainda faltar), apontar riscos, fazer perguntas úteis, e melhorar a proposta.
-- Seja pragmático: foque no que move a decisão.
+═══════════════════════════════════════════
+TAREFA DO SEU TURNO
+═══════════════════════════════════════════
+Analise criticamente a proposta atual e o histórico. Depois:
+1) Proponha ideias novas OU reforce/refine ideias existentes (não repita o que já foi dito sem acrescentar valor).
+2) Aponte riscos concretos (não genéricos) — diga "X falha porque Y" em vez de "pode haver riscos".
+3) Faça perguntas que exponham lacunas reais (não perguntas retóricas).
+4) Melhore a proposta: a sua "proposal_update" deve ser uma EVOLUÇÃO clara da proposta atual (não uma cópia).
 
-Responda APENAS em JSON válido no formato:
+Comportamentos obrigatórios:
+- Se outro agente fez perguntas no histórico que você pode responder, RESPONDA (inclua em "ideas" ou "proposal_update").
+- Se discorda de algo dito antes, diga explicitamente "DISCORDO de [ponto] porque [razão]".
+- Não concorde "por educação": só aumente a maturity se a proposta realmente melhorou.
+- Foque no que MOVE a decisão para a frente; evite repetir pontos já resolvidos.
+
+═══════════════════════════════════════════
+ESCALA DE MATURIDADE (seja rigoroso)
+═══════════════════════════════════════════
+  0 = Ainda não há proposta concreta
+  1 = Há ideias soltas, sem estrutura nem métricas
+  2 = Há uma proposta inicial, mas com lacunas óbvias ou sem validação
+  3 = Proposta razoável, mas falta crítica séria, métricas claras ou plano de execução
+  4 = Proposta sólida: riscos mapeados, métricas definidas, plano executável
+  5 = Pronto para decisão: plano completo, riscos mitigados, action items claros e atribuídos
+
+ATENÇÃO:
+- Na sua PRIMEIRA intervenção, a maturity NÃO deve ser superior a 3 (a proposta ainda não foi validada por todos).
+- Use "done": true APENAS se maturity >= 4 E não tiver perguntas abertas (suas ou de outros).
+- Se tem perguntas pendentes (suas ou de outros agentes), maturity NÃO pode ser >= 4.
+
+═══════════════════════════════════════════
+FORMATO DE RESPOSTA (JSON obrigatório)
+═══════════════════════════════════════════
+Responda APENAS em JSON válido, sem texto antes ou depois:
 {
-  "ideas": ["..."],
-  "risks": ["..."],
-  "questions": ["..."],
-  "proposal_update": "uma versão melhor/mais madura da proposta (curta, concreta)",
+  "ideas": ["ideia concreta 1", "ideia concreta 2"],
+  "risks": ["risco: X falha porque Y", "risco: Z é frágil se W"],
+  "questions": ["pergunta que expõe lacuna real"],
+  "proposal_update": "versão melhorada da proposta (curta, concreta, evolutiva)",
   "maturity": 0,
   "done": false
 }
-
-Regras:
-- "maturity" de 0..5.
-- Se achar que já está pronto, use "done": true e maturity >= 4.
-- Não inclua texto fora do JSON.
